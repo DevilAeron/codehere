@@ -37,10 +37,10 @@ const Getdata = (props) => {
                 let my_endT=moment(end_time).format('LLLL');
                 return <div className="contest-card" ><a href={users[i].url}>
 
-                    <h3>Name: {users[i].name}</h3>
-                    <p>Duration:{hrs} hrs {mins>0?String(mins)+" mins":""}</p>
-                    <p>Start :{my_date}</p>
-                    <p>End: {my_endT}</p>
+                    <h3 style={{color:'red'}}>Name: {users[i].name}</h3>
+                    <p style={{color:'red'}}>Duration:{hrs} hrs {mins>0?String(mins)+" mins":""}</p>
+                    <p style={{color:'red'}}>Start :{my_date}</p>
+                    <p style={{color:'red'}}>End: {my_endT}</p>
                     </a></div>
             })}
         </>

@@ -1,7 +1,7 @@
 import React from "react";
 // core components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
-import Contest from "components/Contests/Upcoming";
+import Contest from "components/Contests/Contest";
 
 export default function Upcoming() {
   React.useEffect(() => {
@@ -14,7 +14,9 @@ export default function Upcoming() {
   return (
     <>
       <IndexNavbar />
-      <Contest/>
+      <div style = {{margin:100}}>
+        <Contest/>
+      </div>
     </>
   );
 }

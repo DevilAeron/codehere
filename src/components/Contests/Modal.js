@@ -1,29 +1,51 @@
 import React from 'react'
+import ReactDOM from 'react-dom';
+import Modal from 'react-modal';
 import Getdata from '../Getdata/Getdata'
 
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+    },
+};
+
+Modal.setAppElement(document.getElementById('root'));
+
 function Modall(props) {
-    const dt = '#' + props.id;
-    const dtitle = props.id + 'Title';
+    let subtitle;
+    const [modalIsOpen, setIsOpen] = React.useState(false);
+
+    function openModal() {
+        setIsOpen(true);
+    }
+
+    function afterOpenModal() {
+        // references are now sync'd and can be accessed.
+        subtitle.style.color = '#f00';
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
     return (
         <>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target={dt}>
-                {props.name}
-            </button>
-
-            <div class="modal" id={props.id} tabindex="-1" role="dialog" aria-labelledby={dtitle} aria-hidden="true">
-                <div class="modal-fullcreen" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id={dtitle}>Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <Getdata url = {props.url}/>
-                        </div>
-                    </div>
-                </div>
+            <div>
+                <button onClick={openModal}>{props.name}</button>
+                <Modal
+                    isOpen={modalIsOpen}
+                    onAfterOpen={afterOpenModal}
+                    onRequestClose={closeModal}
+                    // style={customStyles}
+                    contentLabel="Example Modal"
+                >
+                    <h2 ref={(_subtitle) => (subtitle = _subtitle)} ><Getdata url = {props.url}/></h2>
+                    <button onClick={closeModal}>close</button>
+                </Modal>
             </div>
         </>
     )
