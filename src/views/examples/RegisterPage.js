@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import classnames from "classnames";
 // reactstrap components
 import {
@@ -6,11 +6,8 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
   CardImg,
   CardTitle,
-  Label,
-  FormGroup,
   Form,
   Input,
   InputGroupAddon,
@@ -23,6 +20,7 @@ import {
 
 // core components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
+import { Link, useHistory } from "react-router-dom"
 
 export default function RegisterPage() {
   const [squares1to6, setSquares1to6] = React.useState("");
@@ -30,6 +28,10 @@ export default function RegisterPage() {
   const [fullNameFocus, setFullNameFocus] = React.useState(false);
   const [emailFocus, setEmailFocus] = React.useState(false);
   const [passwordFocus, setPasswordFocus] = React.useState(false);
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const nameRef = useRef();
+  const history = useHistory();
   React.useEffect(() => {
     document.body.classList.toggle("register-page");
     document.documentElement.addEventListener("mousemove", followCursor);
@@ -38,25 +40,46 @@ export default function RegisterPage() {
       document.body.classList.toggle("register-page");
       document.documentElement.removeEventListener("mousemove", followCursor);
     };
-  },[]);
+  }, []);
   const followCursor = (event) => {
     let posX = event.clientX - window.innerWidth / 2;
     let posY = event.clientY - window.innerWidth / 6;
     setSquares1to6(
       "perspective(500px) rotateY(" +
-        posX * 0.05 +
-        "deg) rotateX(" +
-        posY * -0.05 +
-        "deg)"
+      posX * 0.05 +
+      "deg) rotateX(" +
+      posY * -0.05 +
+      "deg)"
     );
     setSquares7and8(
       "perspective(500px) rotateY(" +
-        posX * 0.02 +
-        "deg) rotateX(" +
-        posY * -0.02 +
-        "deg)"
+      posX * 0.02 +
+      "deg) rotateX(" +
+      posY * -0.02 +
+      "deg)"
     );
   };
+
+  function onFormSubmit(e) {
+    e.preventDefault();
+    console.log(emailRef.current.value);
+    //   if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+    //     return setError("Passwords do not match")
+    //   }
+
+    //   try {
+    //     setError("")
+    //     setLoading(true)
+    //     await signup(emailRef.current.value, passwordRef.current.value)
+    //     history.push("/")
+    //   } catch {
+    //     setError("Failed to create an account")
+    //   }
+
+    //   setLoading(false)
+  }
+
+
   return (
     <>
       <IndexNavbar />
@@ -86,7 +109,7 @@ export default function RegisterPage() {
                       <CardTitle tag="h4">Register</CardTitle>
                     </CardHeader>
                     <CardBody>
-                      <Form className="form">
+                      <Form className="form" onSubmit={onFormSubmit}>
                         <InputGroup
                           className={classnames({
                             "input-group-focus": fullNameFocus,
@@ -102,6 +125,7 @@ export default function RegisterPage() {
                             type="text"
                             onFocus={(e) => setFullNameFocus(true)}
                             onBlur={(e) => setFullNameFocus(false)}
+                            innerRef={nameRef}
                           />
                         </InputGroup>
                         <InputGroup
@@ -119,6 +143,7 @@ export default function RegisterPage() {
                             type="text"
                             onFocus={(e) => setEmailFocus(true)}
                             onBlur={(e) => setEmailFocus(false)}
+                            innerRef={emailRef}
                           />
                         </InputGroup>
                         <InputGroup
@@ -136,28 +161,15 @@ export default function RegisterPage() {
                             type="text"
                             onFocus={(e) => setPasswordFocus(true)}
                             onBlur={(e) => setPasswordFocus(false)}
+                            innerRef={passwordRef}
                           />
                         </InputGroup>
-                        <FormGroup check className="text-left">
-                          <Label check>
-                            <Input type="checkbox" />
-                            <span className="form-check-sign" />I agree to the{" "}
-                            <a
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              terms and conditions
-                            </a>
-                            .
-                          </Label>
-                        </FormGroup>
+                        <Button className="btn-round mt-4" color="primary" size="lg" type="submit">
+                          Sign Up
+                        </Button>
                       </Form>
                     </CardBody>
-                    <CardFooter>
-                      <Button className="btn-round" color="primary" size="lg">
-                        Get Started
-                      </Button>
-                    </CardFooter>
+
                   </Card>
                 </Col>
               </Row>

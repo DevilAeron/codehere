@@ -11,10 +11,10 @@ import {GiMagnifyingGlass} from 'react-icons/gi';
 import {GrClear} from 'react-icons/gr';
 import { makeStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
-const muiTheme = createMuiTheme({
+const muiTheme = createTheme({
     overrides:{
       MuiSlider: {
         thumb:{
