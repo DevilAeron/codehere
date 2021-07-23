@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, { useRef, useState } from "react";
 import classnames from "classnames";
 // reactstrap components
 import {
@@ -20,7 +20,8 @@ import {
 
 // core components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
-import { Link, useHistory } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom";
+import { auth } from "components/Authentication/firebase";
 
 export default function RegisterPage() {
   const [squares1to6, setSquares1to6] = React.useState("");
@@ -28,6 +29,8 @@ export default function RegisterPage() {
   const [fullNameFocus, setFullNameFocus] = React.useState(false);
   const [emailFocus, setEmailFocus] = React.useState(false);
   const [passwordFocus, setPasswordFocus] = React.useState(false);
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
   const emailRef = useRef();
   const passwordRef = useRef();
   const nameRef = useRef();
@@ -60,23 +63,37 @@ export default function RegisterPage() {
     );
   };
 
+  function signup(email, password, name) {
+    return auth
+    .createUserWithEmailAndPassword(email, password)
+    .then((res) => {
+      res.user.updateProfile({
+        displayName: name,
+      })
+    });
+  }
+
   function onFormSubmit(e) {
     e.preventDefault();
-    console.log(emailRef.current.value);
-    //   if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-    //     return setError("Passwords do not match")
-    //   }
+    var ev = emailRef.current.value;
+    var pv = passwordRef.current.value;
+    var nv = nameRef.current.value;
+    // console.log(typeof emailRef.current.value)
+    if (ev === '' || pv === '') {
+      alert('Enter details to signup!');
+    }
+    else {
+      try {
+        setError("")
+        setLoading(true)
+        signup(ev, pv, nv)
+        history.push("/profile-page")
+      } catch {
+        setError("Failed to create an account")
+      }
 
-    //   try {
-    //     setError("")
-    //     setLoading(true)
-    //     await signup(emailRef.current.value, passwordRef.current.value)
-    //     history.push("/")
-    //   } catch {
-    //     setError("Failed to create an account")
-    //   }
-
-    //   setLoading(false)
+      setLoading(false)
+    }
   }
 
 
@@ -109,6 +126,7 @@ export default function RegisterPage() {
                       <CardTitle tag="h4">Register</CardTitle>
                     </CardHeader>
                     <CardBody>
+                      {error && <Alert variant="danger">{error}</Alert>}
                       <Form className="form" onSubmit={onFormSubmit}>
                         <InputGroup
                           className={classnames({
@@ -140,7 +158,7 @@ export default function RegisterPage() {
                           </InputGroupAddon>
                           <Input
                             placeholder="Email"
-                            type="text"
+                            type="email"
                             onFocus={(e) => setEmailFocus(true)}
                             onBlur={(e) => setEmailFocus(false)}
                             innerRef={emailRef}
@@ -161,6 +179,7 @@ export default function RegisterPage() {
                             type="text"
                             onFocus={(e) => setPasswordFocus(true)}
                             onBlur={(e) => setPasswordFocus(false)}
+                            minLength={6}
                             innerRef={passwordRef}
                           />
                         </InputGroup>
