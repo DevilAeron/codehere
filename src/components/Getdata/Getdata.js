@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from 'react'
-// import { Loading } from './Loading';
 import moment from 'moment';
 
 const Getdata = (props) => {
 
     const [users, setUsers] = useState([]);
-    // const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
 
     const getUsers = async () => {
         try {
             const response = await fetch(props.url);
-            //  setLoading(false);
+             setLoading(false);
             setUsers(await response.json());
         } catch (error) { 
-            // setLoading(false);
-            // console.log("my error is "+ error);
+            setLoading(false);
+            console.log("my error is "+ error);
         }
     }
 
@@ -22,10 +21,20 @@ const Getdata = (props) => {
         getUsers();
     }, []);
 
-    // if (loading) {
-    //     return <Loading />
-    // }
-    console.log(props.url);
+     if (loading) { 
+         return(
+             <>
+             <div >
+                <h1 style={{color:"whitesmoke"}}>Loading...</h1>
+             </div>
+             </>
+         )
+     }
+    var arr=[];
+    users.map(function(item,i){
+        arr.push(users[i])}
+    );
+    console.log(arr);
     return (
         <>
             {users.map((item,i)=>{
@@ -35,13 +44,15 @@ const Getdata = (props) => {
                 let my_date=moment(start_time).format('LLLL');
                 let end_time=users[i].end_time;
                 let my_endT=moment(end_time).format('LLLL');
-                return <div className="contest-card" ><a href={users[i].url}>
+                return <div className="contest-card" style={{backgroundColor:"transparent"}} ><a  href={users[i].url}>
 
-                    <h3 style={{color:'red'}}>Name: {users[i].name}</h3>
-                    <p style={{color:'red'}}>Duration:{hrs} hrs {mins>0?String(mins)+" mins":""}</p>
-                    <p style={{color:'red'}}>Start :{my_date}</p>
-                    <p style={{color:'red'}}>End: {my_endT}</p>
-                    </a></div>
+                    <h2 style={{color:'whitesmoke'}}>Name: {users[i].name}</h2>
+                    <p style={{color:'whitesmoke',fontSize:"1rem"}}>Duration:{hrs} hrs {mins>0?String(mins)+" mins":""}</p>
+                    <p style={{color:'whitesmoke',fontSize:"1rem"}}>Start :{my_date}</p>
+                    <p style={{color:'whitesmoke',fontSize:"1rem"}}>End: {my_endT}</p>
+                    </a>
+                    <hr style={{color:"whitesmoke"}}></hr>
+                    </div>
             })}
         </>
     )

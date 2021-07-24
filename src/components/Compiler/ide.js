@@ -1,35 +1,32 @@
 import React, { Component } from "react";
 
 import "./ide.css";
+import UploadnSave from "./uploadnsave";
 export default class Ide extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: localStorage.getItem('input')||``,
+      input: localStorage.getItem("input") || ``,
       output: ``,
-      language_id:localStorage.getItem('language_Id')|| 2,
+      language_id: localStorage.getItem("language_Id") || 2,
       user_input: ``,
     };
   }
   input = (event) => {
- 
     event.preventDefault();
-  
+
     this.setState({ input: event.target.value });
-    localStorage.setItem('input', event.target.value)
- 
+    localStorage.setItem("input", event.target.value);
   };
   userInput = (event) => {
     event.preventDefault();
     this.setState({ user_input: event.target.value });
   };
   language = (event) => {
-   
     event.preventDefault();
-   
+
     this.setState({ language_id: event.target.value });
-    localStorage.setItem('language_Id',event.target.value)
-   
+    localStorage.setItem("language_Id", event.target.value);
   };
 
   submit = async (e) => {
@@ -44,7 +41,8 @@ export default class Ide extends Component {
         method: "POST",
         headers: {
           "x-rapidapi-host": "judge0-ce.p.rapidapi.com",
-          "x-rapidapi-key": "beceb7b4c1msh164e654fb2d6c2bp175c96jsnd9f1974db15d",
+          "x-rapidapi-key":
+            "beceb7b4c1msh164e654fb2d6c2bp175c96jsnd9f1974db15d",
           "content-type": "application/json",
           accept: "application/json",
         },
@@ -77,7 +75,8 @@ export default class Ide extends Component {
           method: "GET",
           headers: {
             "x-rapidapi-host": "judge0-ce.p.rapidapi.com",
-            "x-rapidapi-key": "beceb7b4c1msh164e654fb2d6c2bp175c96jsnd9f1974db15d",
+            "x-rapidapi-key":
+              "beceb7b4c1msh164e654fb2d6c2bp175c96jsnd9f1974db15d",
             "content-type": "application/json",
           },
         });
@@ -105,65 +104,65 @@ export default class Ide extends Component {
       outputText.innerHTML += `\n Error :${compilation_error}`;
     }
   };
+
   render() {
- 
     return (
       <>
-        <div className="row container-fluid">
-          <div className="col-6 ml-4 ">
-            <label htmlFor="solution ">
-              <span className="badge badge-info heading mt-2 ">
-                <i className="fas fa-code fa-fw fa-lg"></i> Code Here
-              </span>
-            </label>
-            <textarea
-              required
-              name="solution"
-              id="source"
-              onChange={this.input}
-              className=" source"
-              value={this.state.input}
-            ></textarea>
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <div className="col-7">
+            <div className="mt-2 ml-5 " style={{ display: "flex", flexDirection: "column" }}>
+              <label htmlFor="solution ">
+                <div style={{ color: "whitesmoke" }}> <i className="fas fa-code fa-fw fa-lg" ></i> Code Here </div>
+              </label>
+              <textarea
+                required
+                name="solution"
+                id="source"
+                onChange={this.input}
+                className=" source"
+                value={this.state.input}
+                spellCheck="false"
+              ></textarea>
+              <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+                <button
+                  type="submit"
+                  className="btn btn-danger ml-2 mr-2 "
+                  onClick={this.submit}
+                >
+                  <i className="fas fa-cog fa-fw"></i> Run
+                </button>
 
-            <button
-              type="submit"
-              className="btn btn-danger ml-2 mr-2 "
-              onClick={this.submit}
-            >
-              <i className="fas fa-cog fa-fw"></i> Run
-            </button>
+                <label htmlFor="tags" className="mr-1">
+                  <b className="heading">Language:  </b>
 
-            <label htmlFor="tags" className="mr-1">
-              <b className="heading">Language:</b>
-            </label>
-            <select
-              value={this.state.language_id}
-              onChange={this.language}
-              id="tags"
-              className="form-control form-inline mb-2 language"
-            >
-              <option value="54">C++</option>
-              <option value="50">C</option>
-              <option value="62">Java</option>
-              <option value="71">Python</option>
-            </select>
-          </div>
-          <div className="col-5">
-            <div>
-              <span className="badge badge-info heading my-2 ">
-                <i className="fas fa-exclamation fa-fw fa-md"></i> Output
-              </span>
-              <textarea id="output"></textarea>
+                  <select
+                    value={this.state.language_id}
+                    onChange={this.language}
+                    id="tags"
+                    className=" form-inline  language"
+                  >
+                    <option value="54">C++</option>
+                    <option value="50">C</option>
+                    <option value="62">Java</option>
+                    <option value="71">Python</option>
+                  </select>
+                </label>
+              </div>
+              <UploadnSave/>
             </div>
           </div>
-        </div>
+          <div className="col-5">
+            <div className="mt-2  " style={{ display: "flex", flexDirection: "column" }}>
+              <div style={{ marginBottom: ".5rem", color: 'whitesmoke' }}> <i className="fas fa-user fa-fw fa-md"></i> Input </div>
 
-        <div className="mt-2 ml-5">
-          <span className="badge badge-primary heading my-2 ">
-            <i className="fas fa-user fa-fw fa-md"></i> User Input
-          </span>
-          <br />
-          <textarea id="input" onChange={this.userInput}></textarea>
+              <textarea id="input" onChange={this.userInput} spellCheck="false"></textarea>
+            </div>
+            <div className="mt-2  " style={{ display: "flex", flexDirection: "column" }}>
+              <div style={{ marginBottom: ".5rem", color: 'whitesmoke' }} > <i className="fas fa-exclamation fa-fw fa-md"></i> Output</div>
+
+              <textarea id="output" spellCheck="false"></textarea>
+            </div>
+          </div>
         </div>
       </>
     );

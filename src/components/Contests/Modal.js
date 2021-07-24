@@ -1,15 +1,11 @@
 import React from 'react'
 import Modal from 'react-modal';
 import Getdata from '../Getdata/Getdata'
+import "./Modal.css"
 
 const customStyles = {
     content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
+        top: '10%',
     },
 };
 
@@ -24,8 +20,7 @@ function Modall(props) {
     }
 
     function afterOpenModal() {
-        // references are now sync'd and can be accessed.
-        subtitle.style.color = '#f00';
+        subtitle.style.color = '#171941';
     }
 
     function closeModal() {
@@ -33,17 +28,19 @@ function Modall(props) {
     }
     return (
         <>
-            <div>
-                <button onClick={openModal}>{props.name}</button>
+            <div >
+                <button className="platform-link" onClick={openModal}><span className="platform-name">{props.name}</span></button>
                 <Modal
                     isOpen={modalIsOpen}
                     onAfterOpen={afterOpenModal}
                     onRequestClose={closeModal}
-                    // style={customStyles}
+                    style={customStyles}
+
                     contentLabel="Example Modal"
                 >
-                    <h2 ref={(_subtitle) => (subtitle = _subtitle)} ><Getdata url = {props.url}/></h2>
-                    <button onClick={closeModal}>close</button>
+                    <div className="contest-Modal" > <h2 ref={(_subtitle) => (subtitle = _subtitle)} ><Getdata url={props.url} /></h2>
+                        <button className="btn btn-info btn-sm" onClick={closeModal}>Close</button>
+                    </div>
                 </Modal>
             </div>
         </>

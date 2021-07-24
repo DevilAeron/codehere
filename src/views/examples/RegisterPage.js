@@ -21,7 +21,7 @@ import {
 // core components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import { Link, useHistory } from "react-router-dom";
-import { auth } from "components/Authentication/firebase";
+import firebase from "components/Authentication/firebase";
 
 export default function RegisterPage() {
   const [squares1to6, setSquares1to6] = React.useState("");
@@ -64,7 +64,8 @@ export default function RegisterPage() {
   };
 
   function signup(email, password, name) {
-    return auth
+    return firebase
+    .auth()
     .createUserWithEmailAndPassword(email, password)
     .then((res) => {
       res.user.updateProfile({

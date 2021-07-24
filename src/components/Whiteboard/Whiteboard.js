@@ -21,10 +21,10 @@ const muiTheme = createTheme({
         color: "black",
         },
         track: {
-          color: 'black'
+          color: 'white'
         },
         rail: {
-          color: 'white'
+          color: 'black'
         }
       }
   }
@@ -57,10 +57,10 @@ export const Demo = () => {
                 value={toolval}
             />
             <div id = "tray">
-                <Button onClick={() => settooltype(Tools.Pencil)}><ImPencil2 size = {30}/></Button>
-                <Button onClick={() => settooltype(Tools.Line)}><MdLinearScale size={35}/></Button>
-                <Button onClick={() => settooltype(Tools.Rectangle)}><BiRectangle size = {30}/></Button>
-                <Button onClick={() => settooltype(Tools.Circle)}><BsCircle size = {30}/></Button>
+                <Button onClick={() => settooltype(Tools.Pencil)}><ImPencil2 size = {30} color="white"/></Button>
+                <Button onClick={() => settooltype(Tools.Line)}><MdLinearScale size={35} color="white"/></Button>
+                <Button onClick={() => settooltype(Tools.Rectangle)}><BiRectangle size = {30} color="white"/></Button>
+                <Button onClick={() => settooltype(Tools.Circle)}><BsCircle size = {30} color="white"/></Button>
                 <Button>
                     <div style = {{display: 'block'}}>
                     <InputColor
@@ -84,8 +84,8 @@ export const Demo = () => {
                     </ThemeProvider>
                     </div>
                 </Button>
-                <Button onClick={() => settooltype(Tools.Pan)}><GiMagnifyingGlass size = {30}/></Button>
-                <Button onClick={() => {settoolval({})}}><GrClear size = {30}/></Button>
+                <Button onClick={() => settooltype(Tools.Pan)}><GiMagnifyingGlass size = {30} color="white"/></Button>
+                <Button onClick={() => {settoolval({})}}><GrClear size = {30} color="white"/></Button>
             </div>
         </div>
     )

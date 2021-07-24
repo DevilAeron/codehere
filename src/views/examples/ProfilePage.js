@@ -17,6 +17,7 @@ import {
 // core components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import { AuthContext, useAuth } from "./../Provider";
+import SavedFiles from "components/Notes/SavedFiles";
 
 let ps = null;
 
@@ -97,8 +98,6 @@ export default function ProfilePage() {
   return (
     <>
       <IndexNavbar />
-      {/* {console.log(valval)}
-      {console.log(valval.currentUser.displayName)} */}
       {
         namaewa === null ?
           <div className="wrapper">
@@ -153,7 +152,7 @@ export default function ProfilePage() {
                   <Col>
                     <Card className="card-plain">
                       <CardHeader>
-                        <div style={{ display: "flex", justifyContent: "space-between"}}>
+                        <div style={{ display: "flex", justifyContent: "space-between" }}>
                           <h1 className="profile-title text-left">{namaewa}</h1>
                           <h5 className="text-on-back">Welcome</h5>
                           <Button
@@ -162,11 +161,22 @@ export default function ProfilePage() {
                             data-placement="right"
                             type="button"
                             onClick={handlelogout}
-                            style={{alignSelf: "center"}}
+                            style={{ alignSelf: "center" }}
                           >
                             Logout
                           </Button>
                         </div>
+                      </CardHeader>
+                    </Card>
+                  </Col>
+                </Row>
+              </Container>
+              <Container>
+                <Row>
+                  <Col>
+                    <Card className="card-plain">
+                      <CardHeader>
+                        <SavedFiles/>
                       </CardHeader>
                     </Card>
                   </Col>
