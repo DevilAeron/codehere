@@ -53,6 +53,7 @@ export default function UploadnSave() {
         firebase.database().ref('users').child(uid).push(yourdata)
             .then((data) => {
                 console.log('Uploaded Code File', data);
+                alert("File Uploaded")
                 // Alert.alert('Saved');
             })
             .catch((error) => {
