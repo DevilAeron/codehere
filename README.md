@@ -35,25 +35,57 @@ npm start
 ## Working and UI
 
 - Register a user
+
+
 https://user-images.githubusercontent.com/49195734/126906687-d6b321b3-9206-4706-97c7-b9b9ff67cca2.mp4
 
+
+
 - Login a user
+
+
 https://user-images.githubusercontent.com/49195734/126906703-6d2046ab-661d-414d-987a-04863f13524a.mp4
 
+
+
 - Doodle Board
+
+
 https://user-images.githubusercontent.com/49195734/126906709-6c35e1cb-a955-433d-9dd9-af5b822dda32.mp4
 
+
+
 - Upcoming Contest
+
+
 https://user-images.githubusercontent.com/49195734/126906713-077a108d-e147-4cb0-90d3-1eb0bdd2404c.mp4
 
+
+
 - Compiler
+
+
 https://user-images.githubusercontent.com/49195734/126906716-e696cb2c-c15c-4290-8d70-9c497278cef2.mp4
 
+
+
 - Save
+
+
 https://user-images.githubusercontent.com/49195734/126906729-a36aa80c-6a8e-4b2d-a8ed-bad189e94494.mp4
 
+
+
 - Upload
+
+
 https://user-images.githubusercontent.com/49195734/126906736-74289873-c4fb-4c73-a446-ecf0254e64ad.mp4
 
+
+
 - Profile
+
+
 https://user-images.githubusercontent.com/49195734/126906744-9ffe0d4a-1768-4261-a593-08277ad207e7.mp4
+
+
