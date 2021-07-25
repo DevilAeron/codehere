@@ -18,7 +18,7 @@ const Getdata = (props) => {
     }
 
     useEffect(() => {
-        getUsers();
+        getUsers()
     }, []);
 
      if (loading) { 

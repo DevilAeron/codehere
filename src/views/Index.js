@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 
 // core components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import firebase from 'components/Authentication/firebase';
 import { AuthContext } from 'views/Provider';
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export default function UploadnSave() {
     const [fileUrl, setFileUrl] = React.useState(null);

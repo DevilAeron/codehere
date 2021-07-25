@@ -26,7 +26,7 @@ export default function SavedFiles() {
     }
     return (
         <div>
-            <button onClick={UpdateLogs} color='#b99aff'>Double tap to Refresh Saved Notes</button>
+            <button onClick={UpdateLogs} color='#b99aff' className="btn btn-md btn-info mt-3 mb-3">Tap to Refresh Saved Notes</button>
             {fetchedDataKeys.length > 0 ? (
                 fetchedDataKeys.map((key, index) => (
                     <SingleSaved
@@ -37,9 +37,9 @@ export default function SavedFiles() {
                     />
                 ))
             ) : (
-                <div>
-                    go save some notes
-                </div>
+                <h2>
+                    Go save some Notes/Codes
+                </h2>
             )}
         </div>
     )

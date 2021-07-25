@@ -20,7 +20,7 @@ import {
 
 // core components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import firebase from "components/Authentication/firebase";
 
 export default function RegisterPage() {
@@ -127,7 +127,6 @@ export default function RegisterPage() {
                       <CardTitle tag="h4">Register</CardTitle>
                     </CardHeader>
                     <CardBody>
-                      {error && <Alert variant="danger">{error}</Alert>}
                       <Form className="form" onSubmit={onFormSubmit}>
                         <InputGroup
                           className={classnames({
